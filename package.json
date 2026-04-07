@@ -30,13 +30,5 @@
     "typescript": "~5.8.2",
     "vite": "^6.2.0",
     "@types/express": "^4.17.21"
-  },
-  {
-  "homepage": "https://brndk.github.io/fossibotf2400-landing/",
-  "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "build": "vite build",
-    "preview": "vite preview"
   }
 }
