@@ -33,7 +33,7 @@ const DEFAULT_DATA = {
     badge: "Next-Gen Power Station",
     title: "FOSSiBOT F2400",
     description: "The ultimate portable power solution. 2400W AC output, 2048Wh capacity, and ultra-fast charging to keep your life running anywhere.",
-    image: "https://picsum.photos/seed/powerstation/800/600",
+    image: "https://www.fossibot.com/cdn/shop/files/FOSSiBOT-EUF2400-Green-5.webp?v=1769064089",
     stats: [
       { value: "2400W", label: "AC Output" },
       { value: "2048Wh", label: "Capacity" },
