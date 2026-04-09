@@ -90,40 +90,25 @@ const DEFAULT_DATA = {
 const CMSContext = createContext(null);
 
 const CMSProvider = ({ children }) => {
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [data, setData] = useState(() => {
+  const isEditMode = false; // Permanently disabled
+  const [data] = useState(() => {
     const saved = localStorage.getItem("fossibot_cms_data");
     return saved ? JSON.parse(saved) : DEFAULT_DATA;
   });
 
-  useEffect(() => {
-    localStorage.setItem("fossibot_cms_data", JSON.stringify(data));
-  }, [data]);
-
-  const updateData = (path, value) => {
-    setData(prev => {
-      const newData = JSON.parse(JSON.stringify(prev));
-      const keys = path.split(".");
-      let current = newData;
-      for (let i = 0; i < keys.length - 1; i++) {
-        current = current[keys[i]];
-      }
-      current[keys[keys.length - 1]] = value;
-      return newData;
-    });
-  };
-
   return (
-    <CMSContext.Provider value={{ isEditMode, setIsEditMode, data, updateData }}>
+    <CMSContext.Provider value={{ isEditMode, data }}>
       {children}
-      {/* Edit Toggle Button */}
-      <button 
-        onClick={() => setIsEditMode(!isEditMode)}
-        className={`fixed bottom-8 right-8 z-[100] p-4 rounded-full shadow-2xl transition-all transform hover:scale-110 active:scale-95 flex items-center space-x-2 ${isEditMode ? 'bg-green-500 text-white' : 'bg-amber-500 text-neutral-950'}`}
+      {/* Floating Buy Now Button */}
+      <a 
+        href="https://www.fossibot.com/products/fossibot-f2400?ref=sxrmhzsg&utm_campaign=affiliate_promotions&utm_medium=social&utm_source=affiliate&variant=40054700245064"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-8 right-8 z-[100] p-4 bg-amber-500 text-neutral-950 rounded-full shadow-2xl transition-all transform hover:scale-110 active:scale-95 flex items-center space-x-2 group"
       >
-        {isEditMode ? <Save size={24} /> : <Edit3 size={24} />}
-        <span className="font-bold">{isEditMode ? "Save Changes" : "Edit Page"}</span>
-      </button>
+        <Zap size={24} className="fill-current" />
+        <span className="font-bold text-lg">Buy Now!</span>
+      </a>
     </CMSContext.Provider>
   );
 };
@@ -131,52 +116,27 @@ const CMSProvider = ({ children }) => {
 const useCMS = () => useContext(CMSContext);
 
 const EditableText = ({ path, className, element: Element = "div" }) => {
-  const { isEditMode, data, updateData } = useCMS();
+  const { data } = useCMS();
   const keys = path.split(".");
   let value = data;
   for (const key of keys) value = value[key];
 
-  const handleBlur = (e) => {
-    updateData(path, e.target.innerText);
-  };
-
   return (
-    <Element
-      className={`${className} ${isEditMode ? 'outline-dashed outline-2 outline-amber-500/50 bg-amber-500/5 cursor-text' : ''}`}
-      contentEditable={isEditMode}
-      suppressContentEditableWarning={true}
-      onBlur={handleBlur}
-    >
+    <Element className={className}>
       {value}
     </Element>
   );
 };
 
 const EditableImage = ({ path, className, alt, referrerPolicy }) => {
-  const { isEditMode, data, updateData } = useCMS();
+  const { data } = useCMS();
   const keys = path.split(".");
   let value = data;
   for (const key of keys) value = value[key];
 
-  const handleChange = () => {
-    const newUrl = prompt("Enter new image URL:", value);
-    if (newUrl) updateData(path, newUrl);
-  };
-
   return (
     <div className="relative group">
       <img src={value} className={className} alt={alt} referrerPolicy={referrerPolicy} />
-      {isEditMode && (
-        <button 
-          onClick={handleChange}
-          className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-[inherit] z-20"
-        >
-          <div className="bg-white text-black p-2 rounded-full shadow-lg flex items-center space-x-2">
-            <ImageIcon size={20} />
-            <span className="text-sm font-bold">Change Image</span>
-          </div>
-        </button>
-      )}
     </div>
   );
 };
@@ -200,9 +160,14 @@ const Navbar = () => {
               <a href="#features" className="text-neutral-300 hover:text-amber-500 px-3 py-2 text-sm font-medium transition-colors">Features</a>
               <a href="#specs" className="text-neutral-300 hover:text-amber-500 px-3 py-2 text-sm font-medium transition-colors">Specs</a>
               <a href="#ports" className="text-neutral-300 hover:text-amber-500 px-3 py-2 text-sm font-medium transition-colors">Ports</a>
-              <button className="bg-amber-500 hover:bg-amber-600 text-neutral-950 px-6 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105 active:scale-95">
+              <a 
+                href="https://www.fossibot.com/products/fossibot-f2400?ref=sxrmhzsg&utm_campaign=affiliate_promotions&utm_medium=social&utm_source=affiliate&variant=40054700245064"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-amber-500 hover:bg-amber-600 text-neutral-950 px-6 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105 active:scale-95 inline-block"
+              >
                 Buy Now
-              </button>
+              </a>
             </div>
           </div>
           <div className="md:hidden">
@@ -223,9 +188,14 @@ const Navbar = () => {
           <a href="#features" className="text-neutral-300 hover:text-amber-500 block px-3 py-2 text-base font-medium">Features</a>
           <a href="#specs" className="text-neutral-300 hover:text-amber-500 block px-3 py-2 text-base font-medium">Specs</a>
           <a href="#ports" className="text-neutral-300 hover:text-amber-500 block px-3 py-2 text-base font-medium">Ports</a>
-          <button className="w-full bg-amber-500 text-neutral-950 px-6 py-3 rounded-full text-base font-bold mt-4">
+          <a 
+            href="https://www.fossibot.com/products/fossibot-f2400?ref=sxrmhzsg&utm_campaign=affiliate_promotions&utm_medium=social&utm_source=affiliate&variant=40054700245064"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full bg-amber-500 text-neutral-950 px-6 py-3 rounded-full text-base font-bold mt-4 inline-block text-center"
+          >
             Buy Now
-          </button>
+          </a>
         </motion.div>
       )}
     </nav>
@@ -271,10 +241,15 @@ const Hero = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="bg-amber-500 hover:bg-amber-600 text-neutral-950 px-8 py-4 rounded-full text-lg font-black transition-all flex items-center justify-center space-x-2 group">
+            <a 
+              href="https://www.fossibot.com/products/fossibot-f2400?ref=sxrmhzsg&utm_campaign=affiliate_promotions&utm_medium=social&utm_source=affiliate&variant=40054700245064"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-amber-500 hover:bg-amber-600 text-neutral-950 px-8 py-4 rounded-full text-lg font-black transition-all flex items-center justify-center space-x-2 group"
+            >
               <span>Order Now</span>
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+            </a>
             <button className="border border-neutral-700 hover:border-neutral-500 text-white px-8 py-4 rounded-full text-lg font-bold transition-all">
               Watch Video
             </button>
@@ -542,13 +517,18 @@ export default function App() {
           <Features />
           
           {/* Mid-page CTA */}
-          <section className="py-20 bg-amber-500">
+          <section id="cta" className="py-20 bg-amber-500">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
               <EditableText path="cta.title" className="text-4xl md:text-6xl font-black text-neutral-950 mb-8 tracking-tight" element="h2" />
               <EditableText path="cta.description" className="text-neutral-900/80 text-xl mb-10 max-w-2xl mx-auto font-medium" element="p" />
-              <button className="bg-neutral-950 text-white px-12 py-5 rounded-full text-xl font-black hover:scale-105 transition-transform shadow-2xl">
+              <a 
+                href="https://www.fossibot.com/products/fossibot-f2400?ref=sxrmhzsg&utm_campaign=affiliate_promotions&utm_medium=social&utm_source=affiliate&variant=40054700245064"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-neutral-950 text-white px-12 py-5 rounded-full text-xl font-black hover:scale-105 transition-transform shadow-2xl inline-block"
+              >
                 <EditableText path="cta.button" className="inline" element="span" />
-              </button>
+              </a>
             </div>
           </section>
 
