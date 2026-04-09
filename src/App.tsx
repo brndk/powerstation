@@ -250,9 +250,14 @@ const Hero = () => {
               <span>Order Now</span>
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </a>
-            <button className="border border-neutral-700 hover:border-neutral-500 text-white px-8 py-4 rounded-full text-lg font-bold transition-all">
+            <a 
+              href="https://cutt.ly/1tD80XRt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-neutral-700 hover:border-neutral-500 text-white px-8 py-4 rounded-full text-lg font-bold transition-all flex items-center justify-center"
+            >
               Watch Video
-            </button>
+            </a>
           </div>
         </motion.div>
 
