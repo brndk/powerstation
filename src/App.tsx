@@ -33,7 +33,7 @@ const DEFAULT_DATA = {
     badge: "Next-Gen Power Station",
     title: "FOSSiBOT F2400",
     description: "The ultimate portable power solution. 2400W AC output, 2048Wh capacity, and ultra-fast charging to keep your life running anywhere.",
-    image: "https://www.fossibot.com/cdn/shop/files/FOSSiBOT-EUF2400-Green-5.webp?v=1769064089",
+    image: "https://eu.fossibot.com/cdn/shop/files/f24002022c04.jpg?v=1688008762&width=2000", 
     stats: [
       { value: "2400W", label: "AC Output" },
       { value: "2048Wh", label: "Capacity" },
@@ -54,7 +54,7 @@ const DEFAULT_DATA = {
   },
   specs: {
     title: "Technical Specifications",
-    image: "https://picsum.photos/seed/tech/800/800",
+    image: "https://www.fossibot.com/cdn/shop/files/FOSSiBOT-EUF2400-Green-5.webp?v=1769064089",
     items: [
       { label: "Capacity", value: "2048Wh (51.2V, 40Ah)" },
       { label: "Battery Type", value: "LiFePO4 (Lithium Iron Phosphate)" },
