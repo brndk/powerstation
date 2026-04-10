@@ -79,10 +79,10 @@ const DEFAULT_DATA = {
       { text: "\"Perfect for our RV trips. We can stay off-grid for days and still have all the comforts of home. The UPS feature also saved my work during a storm last week.\"", name: "Sarah L.", role: "Digital Nomad" }
     ],
     gallery: [
-      "https://picsum.photos/seed/camp1/400/500",
-      "https://picsum.photos/seed/camp2/400/300",
-      "https://picsum.photos/seed/camp3/400/300",
-      "https://picsum.photos/seed/camp4/400/500"
+      "https://eu.fossibot.com/cdn/shop/files/f24002022b03.png?v=1760318189&width=750",
+      "https://eu.fossibot.com/cdn/shop/files/f24002022w01.png?v=1688008764&width=750",
+      "https://eu.fossibot.com/cdn/shop/files/f24002022n01.png?v=1688008764&width=1500",
+      "https://eu.fossibot.com/cdn/shop/files/f24002022fa01.png?v=1688008762&width=750"
     ]
   }
 };
